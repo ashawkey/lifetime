@@ -69,14 +69,21 @@ function App() {
   }
 
   function formatDHMS(dhms) {
-    return dhms[0] + ' days ' + dhms[1] + ':' + dhms[2] + ':' + dhms[3];
+    return (
+      <div>
+        {dhms[0]} days
+        {window.screen.width <= 1500 ? <br/> : " "}
+        {dhms[1]}:{dhms[2]}:{dhms[3]}
+      </div>
+    );
+      
   }
     
   return (
     <div className="App">
       <div className="centered unselectable" style={{
-        width: (100 * (now - start) / (end - start)).toString() + '%', 
-        height: "100%", 
+        width: window.screen.width <= 600 ? "100%" : (100 * (now - start) / (end - start)).toString() + '%',
+        height: window.screen.width > 600 ? "100%" : (100 * (now - start) / (end - start)).toString() + '%', 
         float: "left", 
         color: "black",
         backgroundColor: "white"}}
@@ -86,8 +93,8 @@ function App() {
         {formatDHMS(DateDiff.inDHMS(start, now))}
       </div>
       <div className="centered unselectable" style={{
-        width: (100 * (end - now) / (end - start)).toString() + '%', 
-        height: "100%", 
+        width: window.screen.width <= 600 ? "100%" : (100 * (end - now) / (end - start)).toString() + '%',
+        height: window.screen.width > 600 ? "100%" : (100 * (end - now) / (end - start)).toString() + '%', 
         float: "right", 
         color: "white",
         backgroundColor: "black"}}
